@@ -1,0 +1,17 @@
+services:
+  maildev:
+    image: maildev/maildev
+    container_name: maildev
+    ports:
+      - '1080:1080'
+      - '1025:1025'
+
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nest-mail-api
+    depends_on:
+      - maildev
+    ports:
+      - '3000:3000'
